@@ -1,4 +1,4 @@
-                //REGISTRO
+               // REGISTRO
 
 let usuario = "";
 let codigo = "";
@@ -12,15 +12,19 @@ function register (nombreUsuario, email, contraseña) {
 }
 
 while(registro) {
-    alert ("Registrarse para poder realizar la compra")
-    register (prompt("Ingrese su nombre de usuario"), prompt("Ingrese su e-mail"), parseInt(prompt("Crear una contraseña (SOLO NUMEROS)")));
+    alert ("Registrarse para poder realizar la compra");
+    
+    register (prompt("Ingrese su nombre de usuario"),
+    prompt("Ingrese su e-mail"), 
+    parseInt(prompt("Crear una contraseña (SOLO NUMEROS)")));
+
     if(isNaN(usuario) && usuario != "" && !isNaN(codigo) && codigo != "" && mail != "") {
         alert ("Gracias por registrarse!");
         alert ("Debe logearse para poder continuar");
         console.log(`Nombre de usuario: ${usuario} Contraseña: ${codigo}`);
         break;
     } else {
-        alert ("Debe completar el registro correctamente para poder continuar")
+        alert ("Debe completar todos los campos para poder continuar");
         const verificar = prompt("Desea continuar? S/N").toUpperCase();
         if (verificar == "N") {
             registro = false;
@@ -38,10 +42,10 @@ if(usuario != "" && codigo != "" && mail != "" && registro == true){
     
     while (continuarCompra) {   
         const nombreUsuario = prompt("Ingrese su nombre de usuario.");
-        const contraseña = parseInt(prompt("ingrese su contraseña. (SOLO NUMEROS)"));
+        const contrasenia = parseInt(prompt("ingrese su contraseña. (SOLO NUMEROS)"));
     
-        if(nombreUsuario === usuario && contraseña === codigo) {
-            alert (`Bienvenido/a ${nombreUsuario}! A continuación selecciona los productos que desees.-`);
+        if(nombreUsuario === usuario && contrasenia === codigo) {
+            alert (`Bienvenido/a ${nombreUsuario}!!`);
             break;
         } else {        
             alert ("Usuario o Contraseña no coinciden!!");
@@ -57,45 +61,127 @@ if(usuario != "" && codigo != "" && mail != "" && registro == true){
 
         //COMPRA
 
-function sumaCompra(a) {
-    carrito += a
-    cantidadDeProductos ++
-}
+const nbProductos = [
+    {
+        cc: 1,
+        name: "JBL Flip 6",
+        price: 27300
+    },
+    {
+        cc: 2,
+        name: "Teclado Gamer",
+        price: 15800
+    },
+    {
+        cc: 3,
+        name: 'Monitor led LG 29"',
+        price: 175900
+    },
+    {
+        cc: 4,
+        name: "Mouse Trust Gxt133",
+        price: 20194
+    },
+];
 
-let carrito = 0;   
-let cantidadDeProductos = 0;
 
-if(continuarCompra == true && registro == true){
-    
-    while(continuarCompra) {
-    
-        const eleccion = parseInt(prompt ('ingrese una opción: \n 1- Parlante JBL FLIP 6 - $27300 \n 2- Teclado Gamer - $15700 \n 3- Monitor led LG 29" - $175900 \n 4- Ver carrito \n 5- Terminar compra'));
-    
-        switch (eleccion) {
-            case 1: 
-                sumaCompra(27300);
-                alert ("Parlante JBL FLIP 6 agregado al carrito");
-                break;
-            case 2:
-                sumaCompra(15700);
-                alert ("Teclado Gamer agregado al carrito");
-                break;
-            case 3: 
-                sumaCompra(175900)
-                alert ("Monitor LG agregado al carrito")
-                break;
-            case 4:
-                alert (`$${carrito}`)
-                break;
-            case 5:
-                alert(`A elegido ${cantidadDeProductos} productos.
-                El precio total es de: $${carrito}`);
-                continuarCompra = false;
-                break;
-            default:
-                alert ("Opcion invalida");
-                break;
+let carrito = [];
+
+function iniciarCompra() {    
+    if(continuarCompra == true && registro == true) {
+        while(continuarCompra) {
+            let eleccion = parseInt(
+                prompt("Seleccionar Opción: \n 1. Ver Productos \n 2. Seleccionar Productos \n 3. Ver Carrito/ Realizar Comprar \n 4. Salir")
+            );
+            switch(eleccion) {
+                case 1:
+                    verProductos();
+                    break;
+                case 2:
+                    selectProductAcomprar();
+                    break;
+                case 3:
+                    verCarritoComprar();
+                    break;
+                case 4:
+                    continuarCompra = false;
+                    break;
+                default:
+                    alert ("Opción no valida");
+                    break;
+            }
         }
-        console.log(`Total a pagar es de: $${carrito}`)
+    }
+};
+
+function verProductos() {
+    let totalProducts = "";
+    nbProductos.forEach((elem) => {
+        totalProducts += `${elem.cc}. ${elem.name} - $${elem.price} \n`
+    });
+    alert(totalProducts);
+};
+
+function selectProductAcomprar() {
+    verProductos();
+    let selectProduct = parseInt(prompt("Ingrese el numero del producto que desee agregar al carrito"));
+    let productoelegido = nbProductos.find((elem) => elem.cc === selectProduct);
+    if (productoelegido) {
+        carrito.push(productoelegido);
+        alert(`Productos agregados al carrito:\n ${carrito.map(product => `${product.name} - $${product.price}\n`)}`);
+    } else {
+        alert("No se pudo encontrar el producto");
+        selectProductAcomprar();
+    }    
+    let confirmar = prompt("Desea agregar otro producto? S/N").toUpperCase();
+    if (confirmar === "S") {
+        selectProductAcomprar();
+    } else {
+        iniciarCompra();
     }
 }
+
+function verCarritoComprar() {
+    let precioTotal = carrito.reduce((acum, products) => acum + products.price, 0)
+   alert(`Este es tu carrito:\n ${carrito.map(product => `${product.name} - $${product.price}\n`)} \n MONTO TOTAL: $${precioTotal}`);
+
+    if (carrito != "") {
+        let confirmCompra = prompt("Desea realizar la compra de estos productos? S/N").toUpperCase();
+        
+        if (confirmCompra == "S") {
+            alert("Compra realizada con exito!!")
+            eliminarProductos();
+        } else if(confirmCompra == "N") {
+            guardarOeliminar();
+        }
+    }
+}
+
+function guardarOeliminar() {
+    let guardarOno = parseInt(prompt("Guardaremos tu carrito por si deseas agregar otro producto o bien lo puedes eliminar.\n 1. Guardar \n 2. Eliminar... \n 3. Volver atras"));
+    switch(guardarOno) {
+        case 1:
+            alert("Carrito guardado, puedes seguir agregando productos!")
+            iniciarCompra();
+            break;
+        case 2:
+            eliminarProductos();
+            alert("Carrito eliminado!")
+            iniciarCompra();
+            break;
+        case 3:
+            iniciarCompra();
+            break;
+        default:
+            alert("Opcion no valida!");
+            guardarOeliminar();
+            break;
+    }
+}
+
+function eliminarProductos(){
+    carrito.splice(0, carrito.length)
+}
+
+
+iniciarCompra();
