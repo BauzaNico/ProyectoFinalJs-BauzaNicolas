@@ -1,14 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre entrega 1 Bauzá</title>
+    <title>Coder Tienda</title>
+    <link rel="stylesheet" href="./src/assets/css/style.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
 <body>
-    <script src="./javascript/index.js"></script>
+    <header>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="ruta/a/tu/logo.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contacto</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="fi fi-br-search"></i></button>
+                    </form>
+                    <a href="registro.html" class="me-2"><i class="fi fi-br-user"></i></a>
+                    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"><i
+                            class="fi fi-br-shopping-cart"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Offcanvas para el carrito -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrito de compras</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Contenido del carrito de compras -->
+            <strong>TOTAL:</strong>
+        </div>
+    </div>
+    <section>
+        <!-- Carrusel de imágenes -->
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="https://dummyimage.com/1000x350/0a0d5c/fff.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="https://dummyimage.com/1000x350/3a40b5/fff.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="https://dummyimage.com/1000x350/8f92cf/fff.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
+            </button>
+        </div>
+    </section>
+    <div>
+        <h1>Productos Destacados</h1>
+    </div>
+    <main>
+        <div class="card" style="width: 15rem;">
+            <img src="https://dummyimage.com/200x250/8f92cf/fff.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <strong>Producto</strong>
+            </div>
+            <div>
+                <p>Precio</p>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-dark text-light">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-3">
+                    <img src="ruta/a/tu/logo.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-text-top">
+                </div>
+                <div class="col-lg-3">
+                    <h5>Contacto</h5>
+                    <p>Dirección: Calle Principal, Ciudad</p>
+                    <p>Teléfono: +1234567890</p>
+                    <p>Email: info@tudominio.com</p>
+                </div>
+                <div class="col-lg-6 text-lg-end mt-3 mt-lg-0">
+                    <a href="./src/pages/admin.html" class="btn btn-outline-light">Cargar Productos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="./src/javascript/index.js"></script>
 </body>
 
 </html>

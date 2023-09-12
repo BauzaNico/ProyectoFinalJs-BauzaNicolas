@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona stock</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="ruta/a/tu/logo.png" alt="Logo" class="d-inline-block align-text-top">
+            </a>
+            <a class="navbar-brand" href="../../index.html">Inicio</a>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="container mx-auto">
+        <h2>Agregar Producto</h2>
+
+        <form>
+            <div class="mb-6">
+                <label for="id" class="form-label">ID:</label>
+                <input type="text" class="form-control" id="id" name="id" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="marca" class="form-label">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="marca" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" cols="50"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+
+    <footer class="bg-dark text-light">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-3">
+                    <img src="ruta/a/tu/logo.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-text-top">
+                </div>
+                <div class="col-lg-3">
+                    <h5>Contacto</h5>
+                    <p>Dirección: Calle Principal, Ciudad</p>
+                    <p>Teléfono: +1234567890</p>
+                    <p>Email: info@tudominio.com</p>
+                </div>
+                <div class="col-lg-6 text-lg-end mt-3 mt-lg-0">
+                    <a href="../../index.html" class="btn btn-outline-light">Ir a Inicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
