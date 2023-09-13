@@ -38,9 +38,12 @@
                         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit"><i class="fi fi-br-search"></i></button>
                     </form>
-                    <a href="registro.html" class="me-2"><i class="fi fi-br-user"></i></a>
-                    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"><i
-                            class="fi fi-br-shopping-cart"></i></a>
+                    <div>
+                        <button type="button" class="openSub btn btn-outline-secondary"><i
+                                class="fi fi-br-user"></i></button>
+                    </div>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasCart"><i class="fi fi-br-shopping-cart"></i></button>
                 </div>
             </div>
         </nav>
@@ -56,6 +59,26 @@
             <!-- Contenido del carrito de compras -->
             <strong>TOTAL:</strong>
         </div>
+    </div>
+    <!-- SUSCRIPCION -->
+    <div class="containerSub show">
+        <form id="form__sub">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingrese su email">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección">
+            </div>
+            <button type="submit" class="suscribirse btn btn-success">Suscribirse</button>
+            <button type="button" class="cancelarSub btn btn-secondary">Cancelar
+            </button>
+        </form>
     </div>
     <section>
         <!-- Carrusel de imágenes -->

@@ -4,3 +4,31 @@
 .offcanvas-body {
     padding: 1rem;
 }
+
+.containerSub {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.385); 
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.containerSub form {
+    padding: 2rem;
+    width: 30rem;
+    background-color: rgb(222, 236, 248);
+    border-radius: 10px;
+    box-shadow: 0 0 15px ;
+}
+
+.show {
+    display: flex;
+    pointer-events: auto;
+}
+
