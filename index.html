@@ -7,8 +7,8 @@
     <title>Coder Tienda</title>
     <link rel="stylesheet" href="./src/assets/css/style.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -38,46 +38,92 @@
                         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit"><i class="fi fi-br-search"></i></button>
                     </form>
-                    <div>
-                        <button type="button" class="openSub btn btn-outline-secondary"><i
+                    <div id="containerBtnsNav">
+                        <button type="button" class="openSub btnSubDisabled btn btn-outline-secondary"><i
                                 class="fi fi-br-user"></i></button>
+
+                        <div class="btn-group dropdown">
+                            <button class="btnSesionActiva btnNavDisabled btn btn-secondary dropdown-toggle"
+                                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="fi fi-br-exit"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="irAlPerfil dropdown-item disabled" href="#">Ir al perfil</a></li>
+                                <li><a class="cerrarSesion dropdown-item" href="#">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+
+
+                        <button class="btn btn-outline-secondary btnCarrito btnNavDisabled" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasCart"><i class="fi fi-br-shopping-cart"></i></button>
                     </div>
-                    <button class="btn btn-outline-secondary" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasCart"><i class="fi fi-br-shopping-cart"></i></button>
                 </div>
             </div>
         </nav>
     </header>
 
     <!-- Offcanvas para el carrito -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+    <div class="offcanvasContainer offcanvas offcanvas-end carritoDisabled" tabindex="-1" id="offcanvasCart">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrito de compras</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title">Carrito de compras</h5>
+            <button type="button" class="closeCarrito btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <!-- Contenido del carrito de compras -->
             <strong>TOTAL:</strong>
         </div>
     </div>
+
     <!-- SUSCRIPCION -->
     <div class="containerSub show">
-        <form id="form__sub">
+        <form id="formSub">
+            <h5>SUSCRIBIRSE</h5>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+                <input type="text" name="nombre" class="form-control formCompleto" id="nombre"
+                    placeholder="Ingrese un nombre de usuario" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Ingrese su email">
+                <input type="email" name="email" class="form-control formCompleto" id="email"
+                    placeholder="Ejemplo@ejemplo.com" required>
             </div>
             <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección">
+                <label for="contrasenia">Contraseña</label>
+                <input type="password" name="contraseña" class="form-control formCompleto" id="contrasenia"
+                    placeholder="Ingrese una contraseña" required>
             </div>
-            <button type="submit" class="suscribirse btn btn-success">Suscribirse</button>
-            <button type="button" class="cancelarSub btn btn-secondary">Cancelar
-            </button>
+            <div class="form-group">
+                <label for="confirmarContrasenia">Confirmar contraseña</label>
+                <input type="password" name="confirmarContrasenia" class="form-control formCompleto"
+                    id="confirmarContrasenia" placeholder="Confirmar contraseña" required>
+            </div>
+            <div class="btnOptions">
+                <button type="submit" class="btnSuscribirse btn btn-success disabled">Suscribirse</button>
+                <button type="button" class="btnCancelarSub btn btn-secondary">Cancelar
+                </button>
+                <div>
+                    <h6 type="button" class="btnIraLogIn">Iniciar sesión</h6>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- LOGIN -->
+    <div class="containerLogin showLogIn">
+        <form id="formLogIn">
+            <button type="button" class="btn-close btnCierreLogin" data-bs-dismiss="containerLogin"
+                aria-label="Close"></button>
+            <h5>Iniciar sesión</h5>
+            <div class="form-group">
+                <label for="username">Ingrese su e-mail</label>
+                <input type="text" name="username" class="form-control formInicioSesion" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" class="form-control formInicioSesion" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btnIniciarSesion disabled">Iniciar sesión</button>
         </form>
     </div>
     <section>
@@ -104,20 +150,66 @@
             </button>
         </div>
     </section>
-    <div>
-        <h1>Productos Destacados</h1>
-    </div>
+    <h1>Productos</h1>
     <main>
-        <div class="card" style="width: 15rem;">
-            <img src="https://dummyimage.com/200x250/8f92cf/fff.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <strong>Producto</strong>
-            </div>
-            <div>
-                <p>Precio</p>
-            </div>
+        <div class="containerProducto container">
         </div>
     </main>
+    <!-- SECCION CARGA DE PRODUCTOS -->
+    <section>
+        <div class="containerAdmin showAdmin">
+            <form id="formAdmin">
+                <button type="button" class="btn-close btnCierreAdminInicio" data-bs-dismiss="containerAdmin"
+                    aria-label="Close"></button>
+                <h5>Sección administración</h5>
+                <div class="form-group">
+                    <label for="username"></label>
+                    <input type="text" name="username" class="form-control inputAdminInicio" id="username"
+                        placeholder="adminTutor" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"></label>
+                    <input type="password" name="password" class="form-control inputAdminInicio" id="password"
+                        placeholder="adminTutor" required>
+                </div>
+                <button type="button" class="btn btnIrAadmin disabled">Ir a</button>
+            </form>
+        </div>
+
+        <div class="containerCargaProduct showFormCarga">
+            <form id="formCargaProduct">
+                <h5>CARGA DE PRODUCTOS</h5>
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="number" name="id" class="form-control inputPushProduct" id="idProduct" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">NOMBRE:</label>
+                    <input type="text" name="nombre" class="form-control inputPushProduct" id="nombreProduct" required>
+                </div>
+                <div class="form-group">
+                    <label for="marca">MARCA:</label>
+                    <input type="text" name="marca" class="form-control inputPushProduct" id="marcaProduct" required>
+                </div>
+                <div class="form-group">
+                    <label for="precio">PRECIO:</label>
+                    <input type="number" name="precio" class="form-control inputPushProduct" id="precioProduct"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="imagen">IMAGEN:</label>
+                    <input type="url" name="imagen" class="form-control inputPushProduct" placeholder="URL de la imagen"
+                        id="imagen" required>
+                </div>
+
+                <div class="btnOptionsFormAdmin">
+                    <button type="submit" class="btnPushProduct btn btn-success disabled">Agregar</button>
+                    <button type="button" class="btnSalirFormAdmin btn btn-danger">salir</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
     <footer class="bg-dark text-light">
         <div class="container py-4">
             <div class="row">
@@ -132,13 +224,13 @@
                     <p>Email: info@tudominio.com</p>
                 </div>
                 <div class="col-lg-6 text-lg-end mt-3 mt-lg-0">
-                    <a href="./src/pages/admin.html" class="btn btn-outline-light">Cargar Productos</a>
+                    <button class="btnIrAcargarProducto btn btn-outline-light">Cargar Productos</button>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="./src/javascript/index.js"></script>
 </body>

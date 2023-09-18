@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .offcanvas-header {
     padding: 0.5rem;
 }
@@ -5,13 +9,13 @@
     padding: 1rem;
 }
 
-.containerSub {
-    display: none;
+.containerSub, .containerLogin, .containerAdmin, .containerCargaProduct {
+    display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
     z-index: 1000;
-    pointer-events: none;
+    pointer-events: auto;
     background-color: rgba(0, 0, 0, 0.385); 
     top: 0;
     left: 0;
@@ -19,7 +23,7 @@
     width: 100vw;
 }
 
-.containerSub form {
+#formSub, #formLogIn, #formAdmin, #formCargaProduct {
     padding: 2rem;
     width: 30rem;
     background-color: rgb(222, 236, 248);
@@ -27,8 +31,44 @@
     box-shadow: 0 0 15px ;
 }
 
-.show {
+.show, .showLogIn, .showAdmin, .showFormCarga {
+    display: none;
+    pointer-events: none;
+}
+
+.btnOptions {
     display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.btnCancelarSub {
+    margin-inline: 15px;
+}
+
+#containerBtnsNav {
+    margin-inline: 18px;
+}
+
+#containerBtnsNav .btnNavDisabled {
+    display: none;
+}
+
+#containerBtnsNav .btnSubDisabled {
+    display: none;
+}
+
+.carritoDisabled {
+    display: none;
+}
+
+
+.dropdown-item {
     pointer-events: auto;
+}
+
+.containerProducto div {  
+    width: 12rem;
+    margin: 10px;
 }
 
