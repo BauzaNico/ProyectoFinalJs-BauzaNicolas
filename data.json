@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nombre": "Auricular Inalambrico Bluetooth",
+    "marca": "Inpods 12 Eartouch",
+    "precio": 6990.50,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_797390-MLA72038587252_102023-V.webp"
+  },
+  {
+    "id": 2,
+    "nombre": "Auriculares Bluetooth Ipx5 Originales",
+    "marca": " Motorola Motobuds 085",
+    "precio": 23999.00,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_631718-MLA50221860395_062022-V.webp"
+  },
+  {
+    "id": 3,
+    "nombre": "Smart Band 7 ",
+    "marca": "Xiaomi",
+    "precio": 27890.90,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_974754-MLA54925550069_042023-V.webp"
+  },
+  {
+    "id": 4,
+    "nombre": "Reloj Smartwatch Inteligente",
+    "marca": "Samsung",
+    "precio": 19499.50,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_691965-MLA47339202718_092021-V.webp"
+  },
+  {
+    "id": 5,
+    "nombre": "Galaxy A34 128gb 6gb Ram",
+    "marca": "Samsung",
+    "precio": 199999.90,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_651776-MLA54688514315_032023-V.webp"
+  },
+  {
+    "id": 6,
+    "nombre": "iPhone 12 (128 GB) - Blanco",
+    "marca": "Apple",
+    "precio": 1081299,
+    "imagenUrl": "https://http2.mlstatic.com/D_NQ_NP_850683-MLA45716800336_042021-O.webp"
+  }
+]

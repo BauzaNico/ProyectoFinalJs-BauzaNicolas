@@ -1,51 +1,66 @@
-            //SUSCRIPCION
-            //SUSCRIPCION
-const openSub = document.querySelector('.openSub');
-const btnCancelarSub = document.querySelector('.btnCancelarSub');
-const btnSuscribirse = document.querySelector('.btnSuscribirse');
-const containerSub = document.querySelector('.containerSub');
-const formCompleto = document.querySelectorAll('.formCompleto');
+
+//SUSCRIPCION
 const formSub = document.querySelector('#formSub');
-let validarFormSub = false
-            //LOGIN
-            //LOGIN
-const btnIraLogIn = document.querySelector('.btnIraLogIn');
+const openSub = document.querySelector('.openSub');
+const containerSub = document.querySelector('.containerSub');
+const btnSuscribirse = document.querySelector('.btnSuscribirse');
+const btnCancelarSub = document.querySelector('.btnCancelarSub');
+const formCompleto = document.querySelectorAll('.formCompleto');
+//INICIO DE SESION
+const formLogIn = document.querySelector('#formLogIn');
+const inputInicioSesion = document.querySelectorAll('.inputInicioSesion')
 const containerLogin = document.querySelector('.containerLogin');
+const btnIraLogIn = document.querySelector('.btnIraLogIn');
 const btnCierreLogin = document.querySelector('.btnCierreLogin');
 const btnIniciarSesion = document.querySelector('.btnIniciarSesion');
-const formLogIn = document.querySelector('#formLogIn');
-const formInicioSesion = document.querySelectorAll('.formInicioSesion');
 const btnSesionActiva = document.querySelector('.btnSesionActiva');
 const btnCarrito = document.querySelector('.btnCarrito');
 const cerrarSesion = document.querySelector('.cerrarSesion')
-            //SECCION ADMIN
-            //SECCION ADMIN
-const btnIrAcargarProducto = document.querySelector('.btnIrAcargarProducto');
+//SECCION ADMIN
 const containerAdmin = document.querySelector('.containerAdmin');
+const formAdmin = document.querySelector('#formAdmin')
+const inputAdminInicio = document.querySelectorAll('.inputAdminInicio');
+const containerCargaProduct = document.querySelector('.containerCargaProduct');
+const btnIrAcargarProducto = document.querySelector('.btnIrAcargarProducto');
 const btnCierreAdminInicio = document.querySelector('.btnCierreAdminInicio');
 const btnIrAadmin = document.querySelector('.btnIrAadmin');
-const formAdmin = document.querySelector('#formAdmin');
-const containerCargaProduct = document.querySelector('.containerCargaProduct');
-const inputAdminInicio = document.querySelectorAll('.inputAdminInicio');
-const formCargaProduct = document.querySelector('#formCargaProduct');
-const inputPushProduct = document.querySelectorAll('.inputPushProduct');
-const containerProducto = document.querySelectorAll('.containerProducto');
-const btnPushProduct = document.querySelector('.btnPushProduct');
 const btnSalirFormAdmin = document.querySelector('.btnSalirFormAdmin');
-            //AGREGAR PRODUCTOS AL CARRITO
-            //AGREGAR PRODUCTOS AL CARRITO
-const btnAgregarAlCarrito = document.querySelectorAll('.btnAgregarAlCarrito');
-const containerCarrito = document.querySelector('.containerCarrito');
-const closeCarrito = document.querySelector('.closeCarrito');
-const offcanvasContainer = document.querySelector('.offcanvasContainer');
+//CARGAR PRODUCTOS
+const formCargaProduct = document.querySelector('#formCargaProduct');
+const containerProducto = document.querySelector('.containerProducto');
+const nombreProducto = document.querySelector('#nombreProduct');
+const marcaProducto = document.querySelector('#marcaProduct');
+const precioProducto = document.querySelector('#precioProduct');
+const imagenUrl = document.querySelector('#imagenUrl');
+
+const carritoProductos = document.querySelector('#carrito');
 
 
+// ARRAYS Productos
+let productos = [];
+let carrito = obtenerCarritoDelLocalStorage() || [];
 
+// Función para obtener productos del almacenamiento local
+function obtenerCarritoDelLocalStorage() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+}
 
+// Función para cargar productos desde el archivo JSON
+function cargarProductosDesdeJSON() {
+    fetch('./data.json') // Ruta al archivo JSON
+        .then(response => response.json())
+        .then(data => {
+            productos = data;            
+            mostrarProductos();            
+        })
+        .catch(error => {
+            console.error('Error al cargar productos desde el archivo JSON:', error);
+        });
+        
+};
 
-            //SUSCRIPCION
-            //SUSCRIPCION
-
+//SUSCRIPCION
 openSub.addEventListener('click', () => {
     containerSub.classList.remove('show');
 });
@@ -56,47 +71,49 @@ formCompleto.forEach((input) => {
             formCompleto[1].value && 
             formCompleto[2].value && 
             formCompleto[3].value && 
-            formCompleto[3].value === formCompleto[2].value) {
+            formCompleto[3].value === formCompleto[2].value) {     
 
-            validarFormSub = true
             btnSuscribirse.classList.remove('disabled');
             
-        } else {
-            validarFormSub = false
+        } else {            
             btnSuscribirse.classList.add('disabled');
         }
     })
 });
 
-function suscripcionAdd() {
+function nuevaSuscripcion() {
     const nombreUsuario = formCompleto[0].value;
     const email = formCompleto[1].value;
-    const contrasenia = formCompleto[3].value;
-   
-    const datosGuardados = localStorage.getItem('datosSub');
+    const password = formCompleto[3].value;
+
+    const datosGuardados = localStorage.getItem('Datos Suscripcion');
     let suscripciones = [];
 
-    if (datosGuardados) {
+    if(datosGuardados) {
         suscripciones = JSON.parse(datosGuardados);
     }
-   
-    const nuevaSuscripcion = {
+
+  
+    const suscripcion = {
         nombreUsuario,
         email,
-        contrasenia
+        password,
     };
 
-    suscripciones.push(nuevaSuscripcion);
-    localStorage.setItem('datosSub', JSON.stringify(suscripciones));
+    suscripciones.push(suscripcion);
+    localStorage.setItem('Datos Suscripcion', JSON.stringify(suscripciones));
+
+   
     formSub.reset();
     containerSub.classList.add('show');
-    validarFormSub = false;
-};
+    containerLogin.classList.remove('showLogIn');
+}
 
-formSub.addEventListener('submit', (e) => {    
+// evento para manejar la suscripción
+formSub.addEventListener('submit', (e) => {
     e.preventDefault();
-    suscripcionAdd();
-    
+    nuevaSuscripcion()
+
 });
 
 btnCancelarSub.addEventListener('click', () => {
@@ -104,8 +121,7 @@ btnCancelarSub.addEventListener('click', () => {
     formSub.reset();
 });
 
-            //LOGIN
-            //LOGIN
+//INICIO DE SESION
 btnIraLogIn.addEventListener('click', () => {
     containerSub.classList.add('show');
     containerLogin.classList.remove('showLogIn');
@@ -116,15 +132,16 @@ btnCierreLogin.addEventListener('click', () => {
     formLogIn.reset();
 });
 
-formInicioSesion.forEach((input) => {
+// Funciones para manejar el inicio de sesión
+inputInicioSesion.forEach((input) => {
     input.addEventListener('input', () => {
-    const datosSuscripciones = localStorage.getItem('datosSub');
-        if(datosSuscripciones) {
-            const suscripciones = JSON.parse(datosSuscripciones);
-            const usuarioOrEmail = formInicioSesion[0].value;
-            const contrasenia = formInicioSesion[1].value;
-            const usuarioEncontrado = suscripciones.find((e) => 
-                e.email === usuarioOrEmail && e.contrasenia === contrasenia
+    const datosGuardados = localStorage.getItem('Datos Suscripcion');
+        if(datosGuardados) {
+            const suscripcion = JSON.parse(datosGuardados);
+            const emailLogin = inputInicioSesion[0].value;
+            const passwordLogin = inputInicioSesion[1].value;
+            const usuarioEncontrado = suscripcion.find((e) => 
+                e.email === emailLogin && e.password === passwordLogin
             );
 
             if(usuarioEncontrado) {
@@ -138,27 +155,17 @@ formInicioSesion.forEach((input) => {
     })
 })
 
-function sesionIniciada() {
-    const usuario = formInicioSesion[0].value
+function iniciarSesion() {
+    const usuario = inputInicioSesion[0].value
     
     const sesionActiva = {
         usuario
     };
+
     localStorage.setItem('Sesion Activa', JSON.stringify(sesionActiva));
     containerLogin.classList.add('showLogIn')
     formLogIn.reset();
-};
-
-formLogIn.addEventListener('submit', (e) => {
-    e.preventDefault();
-    sesionIniciada();
-    btnIniciarSesion.classList.add('disabled',);
-    mantenerSesion();   
-});
-
-btnIniciarSesion.addEventListener('click', () => {
-    mantenerSesion()
-})
+}
 
 function mantenerSesion() {
     const sesionLocal = localStorage.getItem('Sesion Activa')
@@ -174,13 +181,18 @@ function mantenerSesion() {
     }
 }
 
-btnCarrito.addEventListener('click', () => {
-    offcanvasContainer.classList.remove('carritoDisabled')
-})
+formLogIn.addEventListener('submit', (e) => {
+    e.preventDefault();
+    iniciarSesion();
+    btnIniciarSesion.classList.add('disabled');
+    mantenerSesion()
 
-closeCarrito.addEventListener('click', () => {
-    offcanvasContainer.classList.add('carritoDisabled')
-  })
+});
+
+btnIniciarSesion.addEventListener('click', () => {    
+    mantenerSesion();
+    swal("Sesión Iniciada!", "Ya puedes elegir tus productos", "success");
+})
 
 cerrarSesion.addEventListener('click', () => {
     localStorage.removeItem('Sesion Activa')
@@ -189,8 +201,8 @@ cerrarSesion.addEventListener('click', () => {
 
 mantenerSesion();
 
-            //SECCION ADMIN
-            //SECCION ADMIN
+//SECCION ADMIN
+//SECCION ADMIN
 btnIrAcargarProducto.addEventListener('click', () => {
     containerAdmin.classList.remove('showAdmin');
 });
@@ -206,76 +218,76 @@ inputAdminInicio.forEach((input) => {
         } else {
             btnIrAadmin.classList.add('disabled');
         }
+        
     });
 });
 
-btnIrAadmin.addEventListener('click', () => {
-    formAdmin.reset();
+btnIrAadmin.addEventListener('click', () => {    
     btnIrAadmin.classList.add('disabled');
     containerAdmin.classList.add('showAdmin');
     containerCargaProduct.classList.remove('showFormCarga');
+    formAdmin.reset();
+    
 });
 
-function agregarProducto() {
-    const id = inputPushProduct[0].value;
-    const nombre = inputPushProduct[1].value;
-    const marca = inputPushProduct[2].value;
-    const precio = inputPushProduct[3].value;
-    const imagenUrl = inputPushProduct[4].value;
+// Funciones para cargar productos
 
-    const dbProductsSubidos = {
-        id,
-        nombre,
-        marca,
-        precio,
-        imagenUrl
+function cargarProductosDesdeLocalStorage() {
+    const productosGuardados = localStorage.getItem('productos');
+    productos = productosGuardados ? JSON.parse(productosGuardados) : [];
+}
+
+
+function cargarProductos() { 
+    const producto = {
+        id: Date.now(),
+        nombre: nombreProducto.value,
+        marca: marcaProducto.value,
+        precio: parseFloat(precioProducto.value),
+        imagenUrl: imagenUrl.value || 'https://via.placeholder.com/150',
     };
 
-    let productosAgregados = JSON.parse(localStorage.getItem('Productos Agregados')) || [];
-    productosAgregados.push(dbProductsSubidos);
-    localStorage.setItem('Productos Agregados', JSON.stringify(productosAgregados));
+    
+    productos.push(producto);
 
-    mostrarProducto();
+   
+    localStorage.setItem('productos', JSON.stringify(productos));
+
+ 
+    mostrarProductos();
     formCargaProduct.reset();
 }
 
-function mostrarProducto() {
-    containerProducto.forEach((productos) => {
-        productos.innerHTML = '';
-        const productosEnLocalS = localStorage.getItem('Productos Agregados');
-        if (productosEnLocalS) {
-            const productosAmostrar = JSON.parse(productosEnLocalS);
-            productosAmostrar.forEach((eProducto) => {
-                const card = document.createElement('div');
-                card.classList.add('card')
-                card.classList.add('d-inline-block');
-                card.innerHTML = `
-                <img src="${eProducto.imagenUrl}" class="card-img-top" alt="Imagen del producto">
-                <div class="card-body">
-                  <h6 class="card-title">${eProducto.nombre}</h6>                  
-                  <p class="card-text">${eProducto.marca}</p>
-                  <p class="card-text">$${eProducto.precio}</p>
-                  <button class="btn btn-success btnAgregarAlCarrito" id="${eProducto.id}">Añadir al Carrito</button>
-                </div>`;
-                productos.appendChild(card);
-            });
-        }
-    });
-}
 
-inputPushProduct.forEach((input) => {
-    input.addEventListener('input', () => {
-        if (inputPushProduct[0].value && inputPushProduct[1].value && inputPushProduct[2].value && inputPushProduct[3].value && inputPushProduct[4].value) {
-            btnPushProduct.classList.remove('disabled');
-        } else {
-            btnPushProduct.classList.add('disabled');
-        }
+function mostrarProductos() {    
+    cargarProductosDesdeJSON()
+    
+    containerProducto.innerHTML = '';
+
+    productos.forEach((producto, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.classList.add('d-inline-block');
+        card.innerHTML = `
+            <img src="${producto.imagenUrl}" class="card-img-top" alt="Imagen del producto">
+            <div class="card-body">
+                <h6 class="card-title">${producto.nombre}</h6>                  
+                <p class="card-text">${producto.marca}</p>
+                <p class="card-text">$${parseFloat(producto.precio).toFixed(2)}</p>
+                <button class="btn btn-primary btnAgregarCarrito" data-index="${index}">Agregar al Carrito</button>
+            </div>`;
+        containerProducto.appendChild(card);
+        
     });
-});
+    
+    
+}
 
 formCargaProduct.addEventListener('submit', (e) => {
     e.preventDefault();
-    agregarProducto();
+    cargarProductos()
+    mostrarProductos()
+    
 });
 
 btnSalirFormAdmin.addEventListener('click', () => {
@@ -283,51 +295,103 @@ btnSalirFormAdmin.addEventListener('click', () => {
     containerCargaProduct.classList.add('showFormCarga')
 });
 
-mostrarProducto();
 
-        //AGREGAR PRODUCTOS AL CARRITO
-        //AGREGAR PRODUCTOS AL CARRITO (LO COMENTÉ PORQUE NO ESTOY LOGRANDO QUE FUNCIONE)
 
-// btnAgregarAlCarrito.forEach((btn) => {
-//     btn.addEventListener('click', (e) => {
-//         const productoId = e.target.id;
-//         anadirAlCarrito(productoId);
-//       });
-// });
+// Función para agregar un producto al carrito
 
-// function anadirAlCarrito(productoId) {
-//     const productoSeleccionado = JSON.parse(localStorage.getItem('Productos Agregados')).find((producto) => producto.id === productoId);
+function agregarAlCarrito(index) {
   
-//     let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
-//     carrito.push(productoSeleccionado);
-//     localStorage.setItem('Carrito', JSON.stringify(carrito));
-  
-//     mostrarCarrito();
-//   };
+    const producto = productos[index];
+    carrito.push({
+        nombre: producto.nombre,
+        precio: parseFloat(producto.precio), 
+        imagen: producto.imagenUrl, 
+    });
 
-//   function mostrarCarrito() {
     
-//     const carrito = JSON.parse(localStorage.getItem('Carrito'));
-  
-//     containerCarrito.innerHTML = '';
-  
-//     if (carrito.length === 0) {
-//       containerCarrito.innerHTML = '<p>No hay productos en el carrito</p>';
-//     } else {
-//       let total = 0;
-//       carrito.forEach((producto) => {
-//         containerCarrito.innerHTML += `
-//           <div>
-//             <p>${producto.nombre}</p>
-//             <p>Precio: $${producto.precio}</p>
-//           </div>
-//         `;
-//         total += producto.precio;
-//       });
-//       containerCarrito.innerHTML += `<strong>TOTAL: $${total}</strong>`;
-//     }
-//   };
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 
- 
-  
+    Toastify({
+        text: `Haz agregado ${producto.nombre} al carrito`,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
 
+   
+    mostrarProductosEnCarrito();
+}
+
+function mostrarProductosEnCarrito() {
+    carritoProductos.innerHTML = '';
+
+    let totalCompra = 0;
+
+    carrito.forEach((producto, index) => {
+        const carritoItem = document.createElement('div');
+        carritoItem.className = 'carrito-item card-horizontal';
+        carritoItem.innerHTML = `
+            <div class="carrito-imagen">
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="img-thumbnail">
+            </div>
+            <div class="carrito-info">
+                <h5>${producto.nombre}</h5>
+                <p>$${producto.precio}</p>
+            </div>
+            <div class="carrito-acciones">
+                <button class="btn btn-danger btnEliminarCarrito" data-index="${index}">Eliminar</button>
+            </div>
+        `;
+
+        carritoProductos.appendChild(carritoItem);
+
+        totalCompra += parseFloat(producto.precio);
+    });
+
+    const totalElemento = document.createElement('p');
+    totalElemento.innerHTML = `<strong>TOTAL: $${totalCompra.toFixed(2)}</strong>`;
+    carritoProductos.appendChild(totalElemento);
+}
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btnAgregarCarrito')) {
+        const index = e.target.getAttribute('data-index');
+        agregarAlCarrito(index);
+        mostrarProductosEnCarrito();
+    }
+});
+
+carritoProductos.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btnEliminarCarrito')) {
+        const index = e.target.getAttribute('data-index');
+        carrito.splice(index, 1);
+
+    
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+   
+        mostrarProductosEnCarrito()
+    }
+});
+
+const carritoGuardado = localStorage.getItem('carrito');
+if (carritoGuardado) {
+    carrito.push(...JSON.parse(carritoGuardado));
+    mostrarProductosEnCarrito();
+}
+
+document.addEventListener('DOMContentLoaded', () => {    
+    cargarProductosDesdeJSON();  
+    cargarProductosDesdeLocalStorage()
+    mostrarProductosEnCarrito();
+    mostrarProductos();
+})

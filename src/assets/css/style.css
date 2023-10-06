@@ -2,11 +2,9 @@
     box-sizing: border-box;
 }
 
-.offcanvas-header {
-    padding: 0.5rem;
-}
-.offcanvas-body {
-    padding: 1rem;
+.logo {
+    width: 3rem;
+    height: 3rem;
 }
 
 .containerSub, .containerLogin, .containerAdmin, .containerCargaProduct {
@@ -72,3 +70,6 @@
     margin: 10px;
 }
 
+#offcanvasCart {
+    pointer-events: auto;
+}

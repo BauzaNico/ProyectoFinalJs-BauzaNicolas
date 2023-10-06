@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coder Tienda</title>
     <link rel="stylesheet" href="./src/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -17,8 +19,8 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="ruta/a/tu/logo.png" alt="Logo" width="30" height="30"
-                        class="d-inline-block align-text-top">
+                    <img src="./src/assets/img/logo js.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-text-top logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
@@ -70,8 +72,9 @@
                 aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <!-- Contenido del carrito de compras -->
-            <strong>TOTAL:</strong>
+            <div id="carrito">
+                <!-- Contenido del carrito de compras -->
+            </div>
         </div>
     </div>
 
@@ -117,11 +120,11 @@
             <h5>Iniciar sesión</h5>
             <div class="form-group">
                 <label for="username">Ingrese su e-mail</label>
-                <input type="text" name="username" class="form-control formInicioSesion" id="username" required>
+                <input type="text" name="username" class="form-control inputInicioSesion" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" name="password" class="form-control formInicioSesion" id="password" required>
+                <input type="password" name="password" class="form-control inputInicioSesion" required>
             </div>
             <button type="submit" class="btn btn-primary btnIniciarSesion disabled">Iniciar sesión</button>
         </form>
@@ -131,13 +134,13 @@
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="https://dummyimage.com/1000x350/0a0d5c/fff.png" class="d-block w-100" alt="...">
+                    <img src="./src/assets/img/Portada 1.png" class="d-block w-100" alt="Portada page">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://dummyimage.com/1000x350/3a40b5/fff.png" class="d-block w-100" alt="...">
+                    <img src="./src/assets/img/Portada 2.png" class="d-block w-100" alt="Comunidad page">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://dummyimage.com/1000x350/8f92cf/fff.png" class="d-block w-100" alt="...">
+                    <img src="./src/assets/img/Portada 3.png" class="d-block w-100" alt="Portada decuento">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
@@ -151,6 +154,7 @@
         </div>
     </section>
     <h1>Productos</h1>
+    <!-- listado de productos -->
     <main>
         <div class="containerProducto container">
         </div>
@@ -180,10 +184,6 @@
             <form id="formCargaProduct">
                 <h5>CARGA DE PRODUCTOS</h5>
                 <div class="form-group">
-                    <label for="id">ID:</label>
-                    <input type="number" name="id" class="form-control inputPushProduct" id="idProduct" required>
-                </div>
-                <div class="form-group">
                     <label for="nombre">NOMBRE:</label>
                     <input type="text" name="nombre" class="form-control inputPushProduct" id="nombreProduct" required>
                 </div>
@@ -199,11 +199,11 @@
                 <div class="form-group">
                     <label for="imagen">IMAGEN:</label>
                     <input type="url" name="imagen" class="form-control inputPushProduct" placeholder="URL de la imagen"
-                        id="imagen" required>
+                        id="imagenUrl">
                 </div>
 
                 <div class="btnOptionsFormAdmin">
-                    <button type="submit" class="btnPushProduct btn btn-success disabled">Agregar</button>
+                    <button type="submit" class="btnPushProduct btn btn-success ">Agregar</button>
                     <button type="button" class="btnSalirFormAdmin btn btn-danger">salir</button>
                 </div>
             </form>
@@ -214,8 +214,8 @@
         <div class="container py-4">
             <div class="row">
                 <div class="col-lg-3">
-                    <img src="ruta/a/tu/logo.png" alt="Logo" width="30" height="30"
-                        class="d-inline-block align-text-top">
+                    <img src="./src/assets/img/logo js.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-text-top logo">
                 </div>
                 <div class="col-lg-3">
                     <h5>Contacto</h5>
@@ -229,10 +229,12 @@
             </div>
         </div>
     </footer>
+    <script src="./src/javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="./src/javascript/index.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
